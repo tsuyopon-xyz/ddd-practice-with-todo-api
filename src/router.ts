@@ -12,10 +12,8 @@ const factory = new TodoFactory();
 router.use(express.json());
 
 router.post('/', (req, res) => {
-  console.log(req.body);
-  const id: number = req.body.id;
   const title: string = req.body.title;
-  const command = new TodoCreateCommand({ id, title });
+  const command = new TodoCreateCommand({ title });
   const todoCreate = new TodoCreate(repository, factory);
   const dto = todoCreate.handle(command);
 
