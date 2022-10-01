@@ -10,6 +10,8 @@ import { NotFoundError } from './shared/error/NotFoundError';
 import { ErrorResponse } from './shared/error/ErrorResponse';
 import { TodoUpdateCommand } from './domain/command/TodoUpdateCommand';
 import { TodoUpdateService } from './app/TodoUpdateService';
+import { TodoRemoveCommand } from './domain/command/TodoRemoveCommand';
+import { TodoRemoveService } from './app/TodoRemoveService';
 
 const router = Router();
 const repository = new TodoRepository();
@@ -52,6 +54,20 @@ router.put('/:id', async (req, res) => {
   const title: string = req.body.title;
   const command = new TodoUpdateCommand({ id: parseInt(id), title });
   const service = new TodoUpdateService(repository);
+  const todoResponse = await service.handle(command);
+  if (!todoResponse) {
+    const error = new NotFoundError();
+    const errorResponse = new ErrorResponse(error);
+    return res.status(404).json(errorResponse);
+  }
+
+  res.status(200).json(todoResponse);
+});
+
+router.delete('/:id', async (req, res) => {
+  const id: string = req.params.id;
+  const command = new TodoRemoveCommand({ id: parseInt(id) });
+  const service = new TodoRemoveService(repository);
   const todoResponse = await service.handle(command);
   if (!todoResponse) {
     const error = new NotFoundError();
