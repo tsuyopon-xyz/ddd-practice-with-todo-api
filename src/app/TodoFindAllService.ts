@@ -1,7 +1,7 @@
 import { ITodoRepository } from '../domain/ITodoRepository';
 import { TodoResponse } from '../domain/TodoResponse';
 
-export class TodoFindAll {
+export class TodoFindAllService {
   constructor(private readonly repository: ITodoRepository) {}
 
   async handle(): Promise<TodoResponse[]> {

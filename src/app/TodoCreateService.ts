@@ -3,7 +3,7 @@ import { TodoCreateCommand } from '../domain/command/TodoCreateCommand';
 import { ITodoFactory } from '../domain/ITodoFactory';
 import { TodoResponse } from '../domain/TodoResponse';
 
-export class TodoCreate {
+export class TodoCreateService {
   constructor(
     private readonly repository: ITodoRepository,
     private readonly factory: ITodoFactory
