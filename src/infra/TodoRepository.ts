@@ -15,7 +15,7 @@ export class TodoRepository implements ITodoRepository {
     return createTodoDto(entity);
   }
   findAll() {
-    return [...this.entities];
+    return this.entities.map((entity) => createTodoDto(entity));
   }
 
   findById(id: TodoId) {
