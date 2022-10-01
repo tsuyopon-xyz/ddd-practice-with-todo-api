@@ -1,9 +1,11 @@
 import { TodoEntity } from './TodoEntity';
+import { TodoId } from './TodoId';
+import { TodoDto } from './TodoDto';
 
 export interface ITodoRepository {
-  create: (data: TodoEntity) => TodoEntity;
+  create: (entity: TodoEntity) => TodoDto;
   findAll: () => TodoEntity[];
-  findById: () => TodoEntity | null;
-  update: (data: TodoEntity) => TodoEntity;
-  remove: (data: TodoEntity) => TodoEntity;
+  findById: (id: TodoId) => TodoDto | null;
+  update: (entity: TodoEntity) => TodoDto;
+  remove: (entity: TodoEntity) => TodoDto;
 }
