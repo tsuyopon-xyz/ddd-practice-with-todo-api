@@ -11,20 +11,20 @@ const factory = new TodoFactory();
 
 router.use(express.json());
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const title: string = req.body.title;
   const command = new TodoCreateCommand({ title });
   const todoCreate = new TodoCreate(repository, factory);
-  const dto = todoCreate.handle(command);
+  const todoResponse = await todoCreate.handle(command);
 
-  res.status(201).json(dto);
+  res.status(201).json(todoResponse);
 });
 
-router.get('/', (req, res) => {
+router.get('/', async (_, res) => {
   const todoFindAll = new TodoFindAll(repository);
-  const dtos = todoFindAll.handle();
+  const todoResponses = await todoFindAll.handle();
 
-  res.status(201).json(dtos);
+  res.status(201).json(todoResponses);
 });
 
 export { router };

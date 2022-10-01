@@ -1,11 +1,10 @@
 import { TodoEntity } from './TodoEntity';
 import { TodoId } from './TodoId';
-import { TodoDto } from './TodoDto';
 
 export interface ITodoRepository {
-  create: (entity: TodoEntity) => TodoDto;
-  findAll: () => TodoDto[];
-  findById: (id: TodoId) => TodoDto | null;
-  update: (entity: TodoEntity) => TodoDto;
-  remove: (entity: TodoEntity) => TodoDto;
+  create: (entity: TodoEntity) => Promise<TodoEntity>;
+  findAll: () => Promise<TodoEntity[]>;
+  findById: (id: TodoId) => Promise<TodoEntity | null>;
+  update: (entity: TodoEntity) => Promise<TodoEntity>;
+  remove: (entity: TodoEntity) => Promise<TodoEntity>;
 }

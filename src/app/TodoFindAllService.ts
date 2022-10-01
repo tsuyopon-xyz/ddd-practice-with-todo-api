@@ -1,13 +1,12 @@
 import { ITodoRepository } from '../domain/ITodoRepository';
-import { TodoCreateCommand } from '../domain/command/TodoCreateCommand';
-import { TodoDto } from '../domain/TodoDto';
+import { TodoResponse } from '../domain/TodoResponse';
 
 export class TodoFindAll {
   constructor(private readonly repository: ITodoRepository) {}
 
-  handle(): TodoDto[] {
-    const dtos = this.repository.findAll();
+  async handle(): Promise<TodoResponse[]> {
+    const entities = await this.repository.findAll();
 
-    return dtos;
+    return entities.map((entity) => new TodoResponse(entity));
   }
 }

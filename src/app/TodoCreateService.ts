@@ -1,7 +1,7 @@
 import { ITodoRepository } from '../domain/ITodoRepository';
 import { TodoCreateCommand } from '../domain/command/TodoCreateCommand';
 import { ITodoFactory } from '../domain/ITodoFactory';
-import { TodoDto } from '../domain/TodoDto';
+import { TodoResponse } from '../domain/TodoResponse';
 
 export class TodoCreate {
   constructor(
@@ -9,10 +9,10 @@ export class TodoCreate {
     private readonly factory: ITodoFactory
   ) {}
 
-  handle(command: TodoCreateCommand): TodoDto {
+  async handle(command: TodoCreateCommand): Promise<TodoResponse> {
     const entity = this.factory.create(command);
-    const dto = this.repository.create(entity);
+    const createdEntity = await this.repository.create(entity);
 
-    return dto;
+    return new TodoResponse(createdEntity);
   }
 }
