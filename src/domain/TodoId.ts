@@ -1,4 +1,6 @@
-export class TodoId {
+import { IValueObject } from './IValueObject';
+
+export class TodoId implements IValueObject<number> {
   constructor(private readonly id: number) {
     if (id < 1 || !Number.isInteger(id)) {
       throw new Error('idは1以上の整数値が必要です');

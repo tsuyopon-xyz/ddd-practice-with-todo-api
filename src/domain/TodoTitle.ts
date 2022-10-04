@@ -1,4 +1,6 @@
-export class TodoTitle {
+import { IValueObject } from './IValueObject';
+
+export class TodoTitle implements IValueObject<string> {
   constructor(private readonly title: string) {
     const trimmedText = title.trim();
 
